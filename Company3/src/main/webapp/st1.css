@@ -1,0 +1,23 @@
+@charset "UTF-8";
+#title{
+	
+	background-color:#22223b;
+	height:100px;
+	width:50px;
+	margin-left:25%;
+}
+#content{
+	
+	background-color:#f2e9e4;
+	height:450px;
+	width:650px;
+	margin-left:25%;
+}
+#end{
+	
+	background-color:#c9ada7;
+	height:50px;
+	width:650px;
+	margin-left:25%;
+	
+}
