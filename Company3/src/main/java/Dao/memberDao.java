@@ -1,52 +1,114 @@
 package Dao;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import Model.member;
 public class memberDao implements implDao{
 
 	public static void main(String[] args) {
-		// 驗證 Hibernate 藉由 Persistence.xml 配置 Mysql 連線
-		EntityManagerFactory em = Persistence.createEntityManagerFactory("company");
-		// 印出記憶體位置
-		System.out.println(em);
-		EntityManager E = em.createEntityManager();
-		// 印出 Entity manager 物件
-		System.out.println(E);
-		System.out.println(E.find(member.class,53));
-		//查詢
+
+		// 測試新增 add(Object o) 
 		/*
-		member m = E.find(member.class, 52);
-		System.out.println(m.getId()+"\t"+m.getName());
+		member m1 = new member("teacher","aaa","1234","taipei","111","33");
+		new memberDao().add(m1);
 		*/
-		//修改
+		
+		// 測試查詢 queryId(Integer id)
 		/*
-		m.setPassword("3333");
-		m.setAddress("BAB");
-		EntityTransaction et = E.getTransaction();
-		et.begin();
-		E.merge(m);
-		et.commit();
+		System.out.println(new memberDao().queryId(56));
 		*/
-		//刪除
-		EntityTransaction et = E.getTransaction();
-		member m = E.find(member.class, 52);
-		et.begin();
-		E.remove(m);
-		et.commit();
-		//新增
+		// 測試修改 update(Object o)
 		/*
-		member m = new member("teacher","aaa","1234","taipei","111","33");
-		EntityTransaction et = E.getTransaction();
-		et.begin();
-		E.persist(m);
-		et.commit();
+		member m2 = (member)new memberDao().queryId(56);
+		m2.setAddress("Taipei101");
+		new memberDao().update(m2);
 		*/
+		// 測試刪除 delete(Object o)
+		/*		
+		new memberDao().delete(51);
+		*/
+		// JPQL 語法 - List queryAll()
+		System.out.println(new memberDao().queryAll());
+		// 查詢是否帳號密碼有在 member 資料庫中
+		System.out.println(memberDao.queryUser("ff", "123"));
+		// 查詢是否帳號密碼有在 member 資料庫中
+		System.out.println(memberDao.queryUser("ff2"));
+	}
+	
+	public static member queryUser(String username, String password) {
+		member m1 = null;
+		String JPQL = "select m from member m where m.username=?1 and m.password=?2";
+		EntityManager em = implDao.getDb();
+		Query q = em.createQuery(JPQL);
+		q.setParameter(1, username);
+		q.setParameter(2, password);
+		List l = q.getResultList();
+		if(l.size()!=0) {
+			member[] m2 = (member[])l.toArray(new member[l.size()]);
+			m1=m2[0];
+		}
+		return m1;
+	}
+	// 帳號重複
+	public static member queryUser(String username) {
+		member m1 = null;
+		String JPQL = "select m from member m where m.username=?1";
+		EntityManager em = implDao.getDb();
+		Query q = em.createQuery(JPQL);
+		q.setParameter(1, username);
+		List l = q.getResultList();
+		if(l.size()!=0) {
+			member[] m2 = (member[])l.toArray(new member[l.size()]);
+			m1=m2[0];
+		}
+		return m1;
+	}
+	@Override
+	public void add(Object o) {
+		EntityManager em = implDao.getDb();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.persist(o);
+		et.commit();
 	}
 
+	@Override
+	public Object queryId(Integer id) {
+		EntityManager em = implDao.getDb();
+		member m = em.find(member.class, id);
+		return m;
+	}
 
-	
+	@Override
+	public List queryAll() {
+		String JPQL = "select p from member p";
+		EntityManager em = implDao.getDb();
+		Query q = em.createQuery(JPQL);
+		List l = q.getResultList();
+		return l;
+	}
+		
+
+	@Override
+	public void update(Object o) {
+		EntityManager em = implDao.getDb();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.merge(o);
+		et.commit();		
+	}
+	@Override
+	public void delete(Integer id) {
+		EntityManager em = implDao.getDb();
+		member m = em.find(member.class, id);
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.remove(m);
+		et.commit();		
+	}
 }

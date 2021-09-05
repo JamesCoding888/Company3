@@ -21,6 +21,13 @@ public class porder {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public porder(String desk, Integer a, Integer b, Integer c) {
+		super();
+		this.desk = desk;
+		A = a;
+		B = b;
+		C = c;
+	}
 	public porder(String desk, Integer a, Integer b, Integer c, Integer sum) {
 		super();
 		this.desk = desk;
