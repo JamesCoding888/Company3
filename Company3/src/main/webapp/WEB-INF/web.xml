@@ -9,9 +9,19 @@
   	<description></description>
   	<servlet-class>Controller.LoginController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>addMembercController</servlet-name>
+  	<display-name>addMembercController</display-name>
+  	<description></description>
+  	<servlet-class>Controller.addMembercController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginController</servlet-name>
   	<url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>addMembercController</servlet-name>
+  	<url-pattern>/addMembercController</url-pattern>
   </servlet-mapping>
 </web-app>
   

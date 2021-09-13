@@ -10,7 +10,7 @@
 <body>
 <div id="title"></div>
 <div id="content">
-	<form action="" method="post">
+	<form action="../addMembercController" method="post">
 		<table width=500 align=center>
 			<tr>
 				<td colspan=2 align=center>
@@ -33,7 +33,9 @@
 			<tr>
 				<td>行動
 				<td><input type="text" name="mobile">
-							
+			<tr>
+				<td colspan=2 align=center>
+				<input type="submit" value="ok">
 					
 		</table>
 	</form>

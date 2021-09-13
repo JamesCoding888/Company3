@@ -11,7 +11,48 @@ import Model.member;
 public class memberDao implements implDao{
 
 	public static void main(String[] args) {
+		// 將 Persistence.xml 中的 company 打包成 EntityManagerFactory 
+		EntityManagerFactory em = Persistence.createEntityManagerFactory("company");
+		// 確認  EntityManagerFactory 是否 Object 有成功建立
+		System.out.println(em);
+		// 確認是否 Entity manager 物件在資料庫 member 的第53行有資料
+		EntityManager E = em.createEntityManager();
+		System.out.println(E);
+		System.out.println(E.find(member.class, 53));
+		// 新增
+		/*
+		member m1 = new member("teacher","aaa","1234","taipei","111","33");
+		EntityTransaction etAdd = E.getTransaction();
+		etAdd.begin();
+		E.persist(m1);
+		etAdd.commit();
+		*/
 
+		// 修改
+		/*
+		member m1 = E.find(member.class, 55);
+		m1.setPassword("3333333");
+		m1.setAddress("BAB");
+		EntityTransaction etUpdate = E.getTransaction();
+		etUpdate.begin();
+		E.merge(m1);
+		etUpdate.commit();
+		*/
+		// 查詢
+		/*
+		member query = E.find(member.class, 55);
+		System.out.println(query.getId()+"\t"+query.getName());
+		*/
+		// 刪除
+//		/*
+		EntityTransaction etDelete = E.getTransaction();
+		member m1 = E.find(member.class, 55);
+		etDelete.begin();
+		E.remove(m1);
+		etDelete.commit();
+//		*/	
+		
+		
 		// 測試新增 add(Object o) 
 		/*
 		member m1 = new member("teacher","aaa","1234","taipei","111","33");
@@ -36,8 +77,9 @@ public class memberDao implements implDao{
 		System.out.println(new memberDao().queryAll());
 		// 查詢是否帳號密碼有在 member 資料庫中
 		System.out.println(memberDao.queryUser("ff", "123"));
-		// 查詢是否帳號密碼有在 member 資料庫中
+		// 查詢是否帳號有在 member 資料庫中
 		System.out.println(memberDao.queryUser("ff2"));
+		
 	}
 	
 	public static member queryUser(String username, String password) {
@@ -68,6 +110,8 @@ public class memberDao implements implDao{
 		}
 		return m1;
 	}
+	
+	
 	@Override
 	public void add(Object o) {
 		EntityManager em = implDao.getDb();

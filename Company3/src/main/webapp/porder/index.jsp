@@ -8,14 +8,9 @@
 <link href="../st1.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="title"><jsp:include page="../title.jsp"/></div>
-<div id="content">
-	<h3>註冊成功</h3>
-	<a href="../index.jsp">重新登入</a>
-
-</div>
-
-<div id="end"><jsp:include page="../end.jsp"/></div>
+<div id="title"><jsp:include page="../title.jsp"></jsp:include></div>
+<div id="content"></div>
+<div id="end"><jsp:include page="../end.jsp"></jsp:include></div>
 
 </body>
 </html>

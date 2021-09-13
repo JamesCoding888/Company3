@@ -8,9 +8,11 @@
 <link href="../st1.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="title"></div>
+<div id="title"><jsp:include page="../title.jsp"/></div>
 <div id="content"></div>
-<div id="end"></div>
+<h3>帳號重複</h3>
+<a href="addMember.jsp">重新註冊</a>
+<div id="end"><jsp:include page="../end.jsp"/></div>
 
 </body>
 </html>
