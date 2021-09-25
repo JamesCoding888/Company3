@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../st1.css" rel="stylesheet" type="text/css">
+<link href="../st2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="title"><jsp:include page="../title.jsp"></jsp:include></div>

@@ -67,6 +67,7 @@ public class porder {
 		C = c;
 	}
 	public Integer getSum() {
+		sum = A*120+B*135+C*150;
 		return sum;
 	}
 	public void setSum(Integer sum) {
